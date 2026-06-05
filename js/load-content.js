@@ -63,7 +63,7 @@ window.buildStaffCard = buildStaffCard;
 async function loadWelcome() {
   const el = document.getElementById('content-welcome');
   try {
-    const { body } = await fetchMd('/content/welcome.md');
+    const { body } = await fetchMd('content/welcome.md');
     el.innerHTML = marked.parse(body);
   } catch {
     el.innerHTML = '<p class="loading">Content unavailable.</p>';
@@ -79,11 +79,11 @@ async function loadStaff() {
     if (saved && saved.length) {
       people = saved;
     } else {
-      const res = await fetch('/content/staff/index.json');
+      const res = await fetch('content/staff/index.json');
       if (!res.ok) throw new Error(res.status);
       const { staff } = await res.json();
       people = await Promise.all(
-        staff.map(slug => fetchMd(`/content/staff/${slug}.md`).then(f => f.data))
+        staff.map(slug => fetchMd(`content/staff/${slug}.md`).then(f => f.data))
       );
     }
 
@@ -175,28 +175,28 @@ document.addEventListener('DOMContentLoaded', () => {
   Promise.allSettled([
     loadWelcome(),
     loadSections('content-how-it-works', [
-      { label: 'Getting Started', file: '/content/shadowing.md' },
-      { label: 'Scheduling',      file: '/content/scheduling.md' },
-      { label: 'Songs',           file: '/content/songs.md' },
-      { label: 'Rehearsals',      file: '/content/rehearsals.md' },
+      { label: 'Getting Started', file: 'content/shadowing.md' },
+      { label: 'Scheduling',      file: 'content/scheduling.md' },
+      { label: 'Songs',           file: 'content/songs.md' },
+      { label: 'Rehearsals',      file: 'content/rehearsals.md' },
     ]),
     loadSections('content-on-site', [
-      { label: 'Availability',  file: '/content/blockout.md' },
-      { label: 'Call Times',    file: '/content/calltimes.md' },
-      { label: 'Cancellations', file: '/content/cancellations.md' },
-      { label: 'Parking',       file: '/content/parking.md' },
+      { label: 'Availability',  file: 'content/blockout.md' },
+      { label: 'Call Times',    file: 'content/calltimes.md' },
+      { label: 'Cancellations', file: 'content/cancellations.md' },
+      { label: 'Parking',       file: 'content/parking.md' },
     ]),
     loadSections('content-team-life', [
-      { label: 'In-Ear Monitors', file: '/content/iems.md' },
-      { label: 'Wristbands',      file: '/content/wristbands.md' },
-      { label: 'Green Room',      file: '/content/greenroom.md' },
-      { label: 'Band Seating',    file: '/content/seating.md' },
-      { label: 'Stage Presence',  file: '/content/stagepresence.md' },
+      { label: 'In-Ear Monitors', file: 'content/iems.md' },
+      { label: 'Wristbands',      file: 'content/wristbands.md' },
+      { label: 'Green Room',      file: 'content/greenroom.md' },
+      { label: 'Band Seating',    file: 'content/seating.md' },
+      { label: 'Stage Presence',  file: 'content/stagepresence.md' },
     ]),
     loadSections('content-guidelines', [
-      { label: 'FOBs & Credentials', file: '/content/fobs.md' },
-      { label: 'What to Wear',       file: '/content/dresscode.md' },
-      { label: 'Compensation',       file: '/content/compensation.md' },
+      { label: 'FOBs & Credentials', file: 'content/fobs.md' },
+      { label: 'What to Wear',       file: 'content/dresscode.md' },
+      { label: 'Compensation',       file: 'content/compensation.md' },
     ]),
   ]).then(() => {
     if (window.__editorApplySaved) window.__editorApplySaved();
