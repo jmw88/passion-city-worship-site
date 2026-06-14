@@ -45,7 +45,7 @@ function buildStaffCard(person, index) {
   const initials = (person.name || '?').split(' ').map(w => w[0]).slice(0, 2).join('');
   card.innerHTML = `
     ${person.photo
-      ? `<img class="staff-card__photo" src="${person.photo}" alt="${person.name}" loading="lazy">`
+      ? `<img class="staff-card__photo" src="${person.photo.replace(/^\//, '')}" alt="${person.name}" loading="lazy">`
       : `<div class="staff-card__photo-placeholder">${initials}</div>`}
     <span class="staff-card__name">${person.name || ''}</span>
     <span class="staff-card__role">${person.role || ''}</span>
